@@ -136,28 +136,27 @@ void lihatDaftarAntrean() {
 
 // 5. FILE PROCESSING (Wajib)
 void simpanKeFile() {
-    ofstream file("database_klinik.txt",ios:app);
+    ofstream file("database_klinik.txt"); 
+    
     Pasien* current = head;
     while (current != NULL) {
-        // Format: Nama|Umur|Keluhan
         file << current->nama << "|" << current->umur << "|" << current->keluhan << endl;
         current = current->next;
     }
     file.close();
-    cout << "[SYSTEM] Data berhasil disimpan ke 'database_klinik.txt'.\n";
+    cout << "[SYSTEM] Data berhasil diperbarui ke 'database_klinik.txt'.\n";
 }
 
 void loadDariFile() {
     ifstream file("database_klinik.txt");
-    if (!file.is_open()) return; // Jika file belum ada, abaikan
+    if (!file.is_open()) return; 
 
     string nama, strUmur, keluhan;
-    while (getline(file, nama, '|')) { // Baca sampai tanda '|'
-        getline(file, strUmur, '|');   // Baca umur sebagai string
-        getline(file, keluhan);        // Baca sisanya (keluhan) sampai enter
+    while (getline(file, nama, '|')) {
+        getline(file, strUmur, '|');
+        getline(file, keluhan);
         
         if (nama != "") {
-            // Konversi umur string ke int, lalu masukkan ke antrean
             tambahAntrean(nama, stoi(strUmur), keluhan);
         }
     }
@@ -166,7 +165,7 @@ void loadDariFile() {
 }
 
 int main() {
-    loadDariFile(); // Load data saat program baru jalan
+    loadDariFile();
     
     int pilihan;
     do {
